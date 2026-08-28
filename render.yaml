@@ -8,8 +8,9 @@ services:
     plan: free
 
   # 2. Static Web Site (React Frontend)
-  - type: static
+  - type: web
     name: skillpath-frontend
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     routes:
