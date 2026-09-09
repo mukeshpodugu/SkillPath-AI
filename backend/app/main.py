@@ -205,7 +205,7 @@ def get_dashboard(user_id: int, db: Session = Depends(get_db)):
     )
 
 @app.post("/api/users/{user_id}/actions/{action_id}/complete")
-def complete_action(user_id: int, action_id: int, req: ActionCompleteRequest, db: Session = Depends(get_db)):
+def complete_action(user_id: int, action_id: int, req: ActionCompleteRequest = ActionCompleteRequest(), db: Session = Depends(get_db)):
     # 1. Fetch User and Action
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
