@@ -67,6 +67,31 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     user: UserResponse
 
+# ================= ONBOARDING & DIAGNOSTIC SCHEMAS =================
+class UserOnboard(BaseModel):
+    name: str
+    target_career_id: int
+    known_skill_ids: List[int] = []
+
+class QuestionResponse(BaseModel):
+    id: int
+    skill_id: int
+    text: str
+    option_a: str
+    option_b: str
+    option_c: str
+    option_d: str
+    class Config:
+        from_attributes = True
+
+class SingleAnswerSubmission(BaseModel):
+    question_id: int
+    selected_option: str
+
+class DiagnosticSubmission(BaseModel):
+    answers: List[SingleAnswerSubmission] = []
+
+
 # ================= CAREER & RECOMMENDER SCHEMAS =================
 class SkillResponse(BaseModel):
     id: int
@@ -199,6 +224,10 @@ class LearningActionResponse(BaseModel):
     url: Optional[str] = None
     class Config:
         from_attributes = True
+
+class ActionCompleteRequest(BaseModel):
+    performance_score: Optional[float] = None
+
 
 class NBLAExplanation(BaseModel):
     summary: str
